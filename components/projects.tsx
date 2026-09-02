@@ -21,7 +21,7 @@ export default function Projects() {
   const labels = { created: t.projects.created, collaboration: t.projects.collaboration, client: t.projects.client, personal: t.projects.personal, hackathon: t.projects.hackathon }
   return <section id="projects" className="px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto max-w-6xl">
     <div className="mb-14"><h2 className="mb-5 text-balance text-5xl font-bold md:text-6xl">{t.projects.title} <span className="text-primary">{t.projects.accent}</span></h2><p className="max-w-3xl text-lg leading-relaxed text-muted-foreground">{t.projects.subtitle}</p></div>
-    <div className="grid gap-5 md:grid-cols-2">{projects.map((project, i) => <motion.article key={project.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 2) * .08 }} className="flex min-h-80 flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary">
+    <div className="grid gap-5 md:grid-cols-2">{projects.map((project, i) => <motion.article key={project.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 2) * .08 }} className="interactive-card flex min-h-80 flex-col rounded-xl border border-border bg-card p-7">
       <p className="mb-4 font-mono text-xs uppercase tracking-wider text-primary">{labels[project.type]}</p>
       <h3 className="mb-3 text-2xl font-bold">{project.title}</h3><p className="mb-6 flex-1 leading-relaxed text-muted-foreground">{t.projects.descriptions[i]}</p>
       <div className="mb-6 flex flex-wrap gap-2">{project.tech.map(item => <BrandBadge key={item} name={item} />)}</div>
