@@ -7,15 +7,16 @@ import "./globals.css"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://github.com/rjoserivera"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "José Eliecer Rivera | Desarrollador Full Stack",
   description: "TNS Analista Programador y estudiante de Ingeniería en Informática de la Región de Ñuble. Desarrollo plataformas web y soluciones digitales.",
   keywords: ["José Eliecer Rivera", "Full Stack Developer", "Analista Programador", "Ingeniería en Informática", "Next.js", "React", "Django", "Chile", "Ñuble"],
-  openGraph: { title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica desde la Región de Ñuble.", type: "website", locale: "es_CL", alternateLocale: "en_US", url: siteUrl },
-  twitter: { card: "summary", title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica." },
+  openGraph: { title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica desde la Región de Ñuble.", type: "website", locale: "es_CL", alternateLocale: "en_US", url: siteUrl, images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: "José Eliecer Rivera, desarrollador Full Stack" }] },
+  twitter: { card: "summary_large_image", title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica.", images: ["/opengraph-image.jpg"] },
   alternates: { canonical: siteUrl },
   robots: { index: true, follow: true },
 }
