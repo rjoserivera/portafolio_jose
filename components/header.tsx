@@ -1,101 +1,37 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { Moon, Sun, Menu, X } from "lucide-react"
+import { Languages, Menu, Moon, Sun, X } from "lucide-react"
+import { useState } from "react"
+import { useLanguage } from "./language-provider"
 
-interface HeaderProps {
-  isDark: boolean
-  toggleDarkMode: () => void
-}
+interface HeaderProps { isDark: boolean; toggleDarkMode: () => void }
 
 export default function Header({ isDark, toggleDarkMode }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+  const { language, setLanguage, t } = useLanguage()
   const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#process", label: "Process" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
+    { href: "#about", label: t.nav.about }, { href: "#skills", label: t.nav.skills },
+    { href: "#projects", label: t.nav.projects }, { href: "#journey", label: t.nav.journey },
+    { href: "#contact", label: t.nav.contact },
   ]
 
-  return (
-    <>
-      {/* Skip to main content link for keyboard navigation */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:p-2 focus:bg-primary focus:text-primary-foreground focus:rounded"
-      >
-        Skip to main content
-      </a>
-
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link
-              href="#"
-              className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary focus:rounded"
-            >
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">NB</span>
-              </div>
-              <span className="font-bold text-lg hidden sm:inline">Nikitesh</span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-2 py-1"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Right Actions */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 hover:bg-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
-                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
-                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={isMenuOpen}
-              >
-                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <nav className="md:hidden pb-4 flex flex-col gap-2" aria-label="Mobile navigation">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          )}
+  return <>
+    <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded-lg focus:bg-primary focus:p-2 focus:text-primary-foreground">{t.ui.skip}</a>
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="#main-content" className="flex items-center gap-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">JR</span>
+          <span className="hidden text-lg font-bold sm:inline">Jose Rivera</span>
+        </Link>
+        <nav className="hidden items-center gap-6 md:flex" aria-label={t.ui.mainNav}>{navLinks.map((link) => <a key={link.href} href={link.href} className="rounded px-2 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary">{link.label}</a>)}</nav>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setLanguage(language === "es" ? "en" : "es")} className="inline-flex h-9 items-center gap-2 rounded-lg border border-border px-3 text-sm font-semibold transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary" aria-label={`${t.ui.language}. ${language === "es" ? "English" : "Español"}`}><Languages className="size-4" aria-hidden="true" /><span>{language.toUpperCase()}</span></button>
+          <button onClick={toggleDarkMode} className="rounded-lg p-2 transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary" aria-label={isDark ? t.ui.light : t.ui.dark}>{isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}</button>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="rounded-lg p-2 transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary md:hidden" aria-label={isMenuOpen ? t.ui.closeMenu : t.ui.openMenu} aria-expanded={isMenuOpen}>{isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}</button>
         </div>
-      </header>
-    </>
-  )
+      </div>
+      {isMenuOpen && <nav className="mx-auto flex max-w-6xl flex-col gap-2 px-4 pb-4 md:hidden" aria-label={t.ui.mobileNav}>{navLinks.map((link) => <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground">{link.label}</a>)}</nav>}
+    </header>
+  </>
 }

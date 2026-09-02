@@ -1,115 +1,28 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
 import Script from "next/script"
+import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://github.com/rjoserivera"
 
 export const metadata: Metadata = {
-  title: "Nikitesh Bhadade | Sr. UI Developer & React Specialist | Portfolio",
-  description:
-    "Sr. Software Engineer with 9.5+ years of experience in React, JavaScript, SASS, and design-to-code conversion. Expert in WCAG AA accessibility standards and pixel-perfect UI development.",
-  keywords: [
-    "UI Developer",
-    "React Developer",
-    "Frontend Engineer",
-    "JavaScript",
-    "SASS",
-    "Web Design",
-    "Accessibility",
-    "WCAG AA",
-    "Pune",
-    "nikitesh bhadade",
-    "nikitesh bhadade website",
-    "nikitesh.com",
-    "nikitesh",
-    "nikitesh web ui developer",
-    "nikitesh bhadade ui developer"
-  ],
-  generator: "v0.app",
-  openGraph: {
-    title: "Nikitesh Bhadade | Sr. UI Developer & React Specialist",
-    description:
-      "Sr. Software Engineer with 9.5+ years of experience in React, JavaScript, SASS, and design-to-code conversion.",
-    type: "website",
-    locale: "en_US",
-    url: "https://nikitesh.com",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Nikitesh Bhadade | Sr. UI Developer & React Specialist",
-    description:
-      "Sr. Software Engineer with 9.5+ years of experience in React, JavaScript, SASS, and design-to-code conversion.",
-  },
-  alternates: {
-    canonical: "https://nikitesh.com",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-snippet": -1,
-      "max-image-preview": "large",
-      "max-video-preview": -1,
-    },
-  },
+  metadataBase: new URL(siteUrl),
+  title: "Jose Rivera | Full Stack Developer & AI Builder",
+  description: "Desarrollador Full Stack de la Región de Ñuble, Chile. Construyo productos con Next.js, React, Django e inteligencia artificial.",
+  keywords: ["Jose Rivera", "Full Stack Developer", "Next.js", "React", "Django", "AI Builder", "Chile", "Ñuble"],
+  openGraph: { title: "Jose Rivera | Full Stack Developer & AI Builder", description: "Productos web e inteligencia artificial para resolver problemas reales.", type: "website", locale: "es_CL", alternateLocale: "en_US", url: siteUrl },
+  twitter: { card: "summary", title: "Jose Rivera | Full Stack Developer & AI Builder", description: "Productos web e inteligencia artificial para resolver problemas reales." },
+  alternates: { canonical: siteUrl },
+  robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-L3XQRP3SR9" />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-L3XQRP3SR9', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Nikitesh Bhadade",
-              url: "https://nikiteshbhadade.com",
-              jobTitle: "Sr. Software Engineer",
-              email: "nikiteshb@gmail.com",
-              telephone: "+919561501506",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Pune",
-                addressCountry: "IN",
-              },
-              sameAs: ["https://www.linkedin.com/in/nikiteshbhadade/", "https://github.com/nikiteshb"],
-              knowsAbout: ["React.js", "JavaScript", "SASS", "HTML5", "CSS3", "Web Accessibility", "WCAG AA"],
-            }),
-          }}
-        />
-      </head>
-      <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  )
+export const viewport: Viewport = { themeColor: "#0b090a", width: "device-width", initialScale: 1 }
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const person = { "@context": "https://schema.org", "@type": "Person", name: "Jose Rivera", url: siteUrl, jobTitle: "Full Stack Developer & AI Builder", email: "mailto:rjoseeliecer@gmail.com", address: { "@type": "PostalAddress", addressRegion: "Región de Ñuble", addressCountry: "CL" }, sameAs: ["https://github.com/rjoserivera", "https://www.linkedin.com/in/rjoseeliecer/", "https://www.instagram.com/natsuki_subaru_pride_if/"], knowsAbout: ["Next.js", "React", "Django", "TypeScript", "Python", "Artificial Intelligence"] }
+  return <html lang="es" className="bg-background" suppressHydrationWarning><body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>{children}<Analytics /><Script id="structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></body></html>
 }

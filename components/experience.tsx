@@ -1,151 +1,16 @@
 "use client"
 
+import { Calendar, Languages } from "lucide-react"
 import { motion } from "framer-motion"
-import { Calendar } from "lucide-react"
+import { useLanguage } from "./language-provider"
 
 export default function Experience() {
-  const experiences = [
-    {
-      title: "Sr. Software Engineer",
-      company: "Globant India Pvt Ltd",
-      period: "11/2020 – Present",
-      location: "Pune",
-      highlights: [
-        "Directed a cross-functional team of 5 designers and developers to architect and deliver enterprise-scale web applications using React.js, Next.js, JavaScript and TypeScript.",
-        "Translated complex Figma, PSD and InDesign prototypes into scalable, production-ready frontend components, ensuring strict design fidelity and cross-browser compatibility.",
-        "Modernized legacy software products by upgrading frontend architecture to contemporary web standards, accelerating page-load speeds and improving Core Web Vitals.",
-        "Championed web accessibility across digital products by implementing and enforcing WCAG 2.2 AA standards, resulting in compliant and inclusive user experiences.","Integrated AI tooling—including GitHub Copilot, Claude and internal AI tools—into the team’s daily workflow, reducing boilerplate coding time and accelerating sprint delivery."
-      ],
-    },
-    {
-      title: "Sr. Web Designer",
-      company: "Markets and Markets Research Pvt. Ltd",
-      period: "05/2019 – 11/2020",
-      location: "Pune",
-      highlights: [
-        "Created responsive web pages integrating PSD designs to HTML and Angular 7",
-        "Designed UIs for dynamic email templates",
-        "Restyled UI components for improved appeal and usability",
-        "Managed version control with Git",
-      ],
-    },
-    {
-      title: "Web Designer",
-      company: "Yardi Software India Pvt. Ltd",
-      period: "10/2017 – 05/2019",
-      location: "Pune",
-      highlights: [
-        "Executed design process for dynamic/static email templates",
-        "Integrated PSD to HTML/.NET framework",
-        "Redesigned products for modern standards and ADA compliance",
-        "Managed frontend UI for Angular 2",
-      ],
-    },
-    {
-      title: "Web Designer",
-      company: "Circl Design India Pvt. Ltd",
-      period: "04/2017 – 09/2017",
-      location: "Pune",
-      highlights: [
-        "Developed website projects using HTML, CSS, WordPress",
-        "Created responsive layouts with Bootstrap",
-        "Implemented dynamic functions with JavaScript/jQuery",
-      ],
-    },
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6 },
-    },
-  }
-
-  return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/10">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-balance">
-            Professional{" "}
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Experience
-            </span>
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full" />
-        </motion.div>
-
-        <motion.div
-          className="space-y-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {experiences.map((exp, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <motion.div
-                className="relative pl-8 pb-8 border-l-2 border-primary/30 last:pb-0 hover:border-primary transition-colors"
-                whileHover={{ paddingLeft: 32 }}
-              >
-                <motion.div
-                  className="absolute -left-3 top-0 w-4 h-4 bg-primary rounded-full"
-                  aria-hidden="true"
-                  whileHover={{ scale: 1.3 }}
-                />
-
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground">{exp.title}</h3>
-                    <p className="text-primary font-medium">{exp.company}</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" aria-hidden="true" />
-                    <time>{exp.period}</time>
-                  </div>
-                </div>
-
-                <p className="text-sm text-muted-foreground mb-4">{exp.location}</p>
-
-                <ul className="space-y-2">
-                  {exp.highlights.map((highlight, i) => (
-                    <motion.li
-                      key={i}
-                      className="text-sm text-muted-foreground flex gap-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.05, duration: 0.4 }}
-                    >
-                      <span className="text-primary mt-1 flex-shrink-0" aria-hidden="true">
-                        •
-                      </span>
-                      <span>{highlight}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
+  const { t } = useLanguage()
+  return <section id="journey" className="bg-secondary/10 px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto max-w-5xl">
+    <div className="mb-14"><h2 className="mb-5 text-balance text-5xl font-bold md:text-6xl">{t.journey.title} <span className="text-primary">{t.journey.accent}</span></h2><p className="max-w-2xl text-lg text-muted-foreground">{t.journey.subtitle}</p></div>
+    <div className="grid gap-10 lg:grid-cols-[1.3fr_.7fr]">
+      <div className="flex flex-col">{t.journey.items.map((item, index) => <motion.article key={item.title} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative border-l-2 border-primary/30 pb-10 pl-8 last:pb-0"><span className="absolute -left-2 top-1 size-3 rounded-full bg-primary"/><div className="mb-2 flex flex-col justify-between gap-2 sm:flex-row"><h3 className="text-xl font-bold">{item.title}</h3><span className="inline-flex items-center gap-2 text-sm text-primary"><Calendar className="size-4" />{item.meta}</span></div><p className="leading-relaxed text-muted-foreground">{item.description}</p></motion.article>)}</div>
+      <aside className="h-fit rounded-xl border border-border bg-card p-6"><div className="mb-5 flex items-center gap-3"><Languages className="size-5 text-primary"/><h3 className="text-xl font-bold">{t.journey.languages}</h3></div><ul className="flex flex-col gap-3">{t.journey.languageItems.map(item => <li key={item} className="rounded-lg bg-secondary px-4 py-3 text-sm text-secondary-foreground">{item}</li>)}</ul></aside>
+    </div>
+  </div></section>
 }

@@ -1,128 +1,25 @@
 "use client"
 
+import { BrainCircuit, Cloud, Code2, Database, Server, Wrench } from "lucide-react"
 import { motion } from "framer-motion"
-import { Code2, Palette, Database, Zap } from "lucide-react"
+import { useLanguage } from "./language-provider"
+
+const skillLists = [
+  ["TypeScript", "JavaScript", "Python", "PHP", "HTML", "CSS"],
+  ["React", "Next.js", "Tailwind CSS", "Bootstrap", "Vite", "jQuery"],
+  ["Django", "Laravel", "Node.js"],
+  ["MySQL", "MariaDB", "SQLite", "Supabase"],
+  ["Vercel", "cPanel", "Claude AI", "OpenAI"],
+  ["Git", "GitHub", "Claude Code", "VS Code", "Cursor", "Postman", "v0"],
+]
+const icons = [Code2, Code2, Server, Database, Cloud, Wrench]
 
 export default function Skills() {
-  const skillCategories = [
-    {
-      title: "Frontend",
-      icon: Code2,
-      skills: ["React", "Next.js"," JavaScript", "TypeScript"," Redux Toolkit",
-        "TanStack Query", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap", "Sass/Less", "Responsive UI"," WCAG 2.2 AA, ADA"],
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "Styling",
-      icon: Palette,
-      skills: ["SASS", "LESS", "Tailwind CSS", "Bootstrap 5", "Material UI", "Responsive Design"],
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      title: "CMS & Tools (FE)",
-      icon: Database,
-      skills: ["Drupal","AEM"," Sitecore", "Git", "Figma", "InVision", "Adobe Suite", "Playwright"],
-      color: "from-orange-500 to-red-500",
-    },
-    {
-      title: "AI Tools",
-      icon: Zap,
-      skills: ["Cursor", "GitHub Copilot", "Claude", "Gemini Pro", "ChatGPT"],
-      color: "from-green-500 to-emerald-500",
-    },
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  }
-
-  return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/10">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-balance">
-            Skills &{" "}
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Expertise
-            </span>
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full" />
-        </motion.div>
-
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {skillCategories.map((category) => {
-            const Icon = category.icon
-            return (
-              <motion.div key={category.title} variants={itemVariants}>
-                <motion.div
-                  className="relative h-full p-6 bg-card rounded-lg border border-border overflow-hidden group cursor-pointer"
-                  whileHover={{ y: -8, borderColor: "var(--primary)" }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  <div className="relative z-10">
-                    <motion.div
-                      className="flex items-center gap-3 mb-6"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    >
-                      <div className={`p-3 rounded-lg bg-gradient-to-br ${category.color}`}>
-                        <Icon className="w-6 h-6 text-white" aria-hidden="true" />
-                      </div>
-                      <h3 className="font-bold text-lg text-foreground">{category.title}</h3>
-                    </motion.div>
-
-                    <ul className="space-y-3">
-                      {category.skills.map((skill, idx) => (
-                        <motion.li
-                          key={skill}
-                          className="text-sm text-muted-foreground flex items-center gap-2"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: idx * 0.05, duration: 0.4 }}
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
-                          {skill}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-      </div>
-    </section>
-  )
+  const { t } = useLanguage()
+  return <section id="skills" className="bg-secondary/10 px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto max-w-6xl">
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-14">
+      <h2 className="mb-5 text-balance text-5xl font-bold md:text-6xl">{t.skills.title} <span className="text-primary">{t.skills.accent}</span></h2><p className="max-w-2xl text-lg text-muted-foreground">{t.skills.subtitle}</p>
+    </motion.div>
+    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{t.skills.categories.map((title, i) => { const Icon = icons[i]; return <motion.article key={title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .05 }} className="rounded-xl border border-border bg-card p-6"><div className="mb-5 flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-lg bg-primary/10"><Icon className="size-5 text-primary" /></span><h3 className="font-bold">{title}</h3></div><div className="flex flex-wrap gap-2">{skillLists[i].map(skill => <span key={skill} className="rounded-md bg-secondary px-3 py-1.5 text-sm text-secondary-foreground">{skill}</span>)}</div></motion.article> })}</div>
+  </div></section>
 }

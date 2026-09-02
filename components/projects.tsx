@@ -2,134 +2,24 @@
 
 import { ExternalLink, Github } from "lucide-react"
 import { motion } from "framer-motion"
-import { AnimatedCard } from "./aceternity/animated-card"
+import { useLanguage } from "./language-provider"
+
+const projects = [
+  { title: "HR Copilot Chile", tech: ["Next.js", "TypeScript", "Claude AI", "Tailwind"], live: "https://hr-chile.vercel.app", tag: "hackathon" },
+  { title: "Austral Collector", tech: ["JavaScript", "React", "PHP", "MySQL", "PWA"], live: "https://australcollector.cl/", repo: "https://github.com/rjoserivera/Austral_Collector", tag: "client" },
+  { title: "Agente Inventario", tech: ["Next.js", "JavaScript", "AI Agent"], repo: "https://github.com/rjoserivera/Agente_inventario_sistema" },
+  { title: "OB Care", tech: ["Python", "Django", "HTML5"], repo: "https://github.com/rjoserivera/obtetric_care" },
+]
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "E-Commerce Platform",
-      description: "Full-featured e-commerce application with product catalog, shopping cart, and checkout flow.",
-      technologies: ["React", "Redux Toolkit", "SASS", "GraphQL", "Node.js"],
-      link: "#",
-      github: "#",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "Email Campaign Manager",
-      description: "Dynamic email template builder with real-time preview and responsive design support.",
-      technologies: ["React", "Redux", "HTML5", "CSS3", "JavaScript"],
-      link: "#",
-      github: "#",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      title: "Design System Components",
-      description: "Comprehensive component library with accessibility standards and extensive documentation.",
-      technologies: ["React", "TypeScript", "Storybook", "SASS", "WCAG 2.2 AA"],
-      link: "#",
-      github: "#",
-      gradient: "from-green-500 to-emerald-500",
-    },
-    {
-      title: "Analytics Dashboard",
-      description: "Real-time analytics dashboard with interactive charts and data visualization.",
-      technologies: ["React", "Next.js", "Tailwind CSS", "Chart.js", "API Integration"],
-      link: "#",
-      github: "#",
-      gradient: "from-orange-500 to-red-500",
-    },
-    {
-      title: "Responsive Website Redesign",
-      description: "Complete redesign of legacy product for modern standards and improved performance.",
-      technologies: ["React", "SASS", "Bootstrap", "Figma to Code", "Performance Optimization"],
-      link: "#",
-      github: "#",
-      gradient: "from-indigo-500 to-blue-500",
-    },
-    {
-      title: "Accessibility Audit Tool",
-      description: "Tool for auditing web accessibility compliance and generating improvement reports.",
-      technologies: ["React", "JavaScript", "WCAG Standards", "Node.js", "Testing"],
-      link: "#",
-      github: "#",
-      gradient: "from-teal-500 to-cyan-500",
-    },
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl font-bold mb-12 text-balance"
-        >
-          Featured Projects
-        </motion.h2>
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {projects.map((project, idx) => (
-            <AnimatedCard key={project.title} className="h-full">
-              <div className="group relative p-6 bg-card rounded-lg border border-border hover:border-primary transition-all hover:shadow-xl h-full overflow-hidden">
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-                />
-
-                <div className="relative z-10">
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech) => (
-                      <motion.span
-                        key={tech}
-                        whileHover={{ scale: 1.05 }}
-                        className="px-2 py-1 bg-primary/10 text-primary text-xs rounded font-medium hover:bg-primary/20 transition-colors"
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-3">
-                    <motion.a
-                      whileHover={{ x: 4 }}
-                      href={project.link}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
-                    >
-                      View Live
-                      <ExternalLink className="w-4 h-4" />
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.1 }}
-                      href={project.github}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <Github className="w-4 h-4" />
-                    </motion.a>
-                  </div>
-                </div>
-              </div>
-            </AnimatedCard>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
+  const { t } = useLanguage()
+  return <section id="projects" className="px-4 py-24 sm:px-6 lg:px-8"><div className="mx-auto max-w-6xl">
+    <div className="mb-14"><h2 className="mb-5 text-balance text-5xl font-bold md:text-6xl">{t.projects.title} <span className="text-primary">{t.projects.accent}</span></h2><p className="max-w-2xl text-lg text-muted-foreground">{t.projects.subtitle}</p></div>
+    <div className="grid gap-5 md:grid-cols-2">{projects.map((project, i) => <motion.article key={project.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * .08 }} className="flex min-h-72 flex-col rounded-xl border border-border bg-card p-7 transition-colors hover:border-primary">
+      {project.tag && <p className="mb-4 font-mono text-xs uppercase tracking-wider text-primary">{project.tag === "client" ? t.projects.client : t.projects.hackathon}</p>}
+      <h3 className="mb-3 text-2xl font-bold">{project.title}</h3><p className="mb-6 flex-1 leading-relaxed text-muted-foreground">{t.projects.descriptions[i]}</p>
+      <div className="mb-6 flex flex-wrap gap-2">{project.tech.map(item => <span key={item} className="rounded-md bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">{item}</span>)}</div>
+      <div className="flex flex-wrap gap-5">{project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{t.projects.live}<ExternalLink className="size-4" /></a>}{project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold hover:text-primary"><Github className="size-4" />{t.projects.repo}</a>}</div>
+    </motion.article>)}</div>
+  </div></section>
 }

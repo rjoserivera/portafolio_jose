@@ -1,12 +1,7 @@
 import type { MetadataRoute } from "next"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://nikitesh.com",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-  ]
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  if (!siteUrl) return []
+  return [{ url: siteUrl, lastModified: new Date(), changeFrequency: "monthly", priority: 1 }]
 }

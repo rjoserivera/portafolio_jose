@@ -1,0 +1,57 @@
+"use client"
+
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+
+export type Language = "es" | "en"
+
+const copy = {
+  es: {
+    nav: { about: "Sobre mí", skills: "Habilidades", projects: "Proyectos", journey: "Trayectoria", contact: "Contacto" },
+    ui: { skip: "Saltar al contenido", mainNav: "Navegación principal", mobileNav: "Navegación móvil", openMenu: "Abrir menú", closeMenu: "Cerrar menú", light: "Cambiar a modo claro", dark: "Cambiar a modo oscuro", language: "Cambiar idioma", external: "abre en una nueva ventana" },
+    hero: { badge: "Disponible para nuevos proyectos", role: "Full Stack Developer · AI Builder", intro: "Construyo productos web que resuelven problemas reales, combinando Next.js, React y Django con inteligencia artificial cuando el desafío lo requiere.", work: "Ver proyectos", talk: "Hablemos", since: "Desarrollando desde 2022", location: "Región de Ñuble, Chile", focus: "Web + IA aplicada" },
+    about: { title: "Sobre", accent: "mí", p1: "Soy un desarrollador Full Stack apasionado por convertir ideas en productos digitales útiles. Trabajo con clientes que quieren llevar su negocio al mundo digital y participo en hackathones donde aprendo y construyo bajo presión.", p2: "Me especializo en Next.js, React y Django, e integro inteligencia artificial cuando aporta valor real al producto.", expertise: "En qué me enfoco", info: "Datos rápidos", cards: [{ title: "Productos reales", description: "Soluciones web pensadas para necesidades concretas de negocios y comunidades." }, { title: "IA aplicada", description: "Integración de LLMs y agentes en experiencias que simplifican tareas complejas." }, { title: "Aprendizaje continuo", description: "Explorando agentes autónomos y arquitecturas escalables." }], labels: { location: "Ubicación", email: "Correo", experience: "Experiencia", languages: "Idiomas" }, values: { experience: "Desde 2022", languages: "ES · EN · JP" } },
+    skills: { title: "Stack y", accent: "herramientas", subtitle: "Tecnologías que utilizo para diseñar, construir y desplegar productos de extremo a extremo.", categories: ["Lenguajes", "Frontend", "Backend", "Bases de datos", "Cloud e IA", "Flujo de trabajo"] },
+    projects: { title: "Proyectos", accent: "destacados", subtitle: "Productos para clientes, experimentos con agentes y soluciones construidas para contextos reales.", live: "Ver proyecto", repo: "Ver código", client: "Proyecto para cliente · Completado", hackathon: "Zero to Agent · Vercel Global Hackathon, abr. 2026", descriptions: ["Asistente de RR. HH. con IA para el contexto laboral chileno. Responde dudas sobre el Código del Trabajo usando Claude AI.", "Plataforma comunitaria para coleccionistas chilenos de figuras vintage y juguetes retro, con estética dark-fantasy, steampunk y soporte PWA.", "Gestión de inventario con un agente de IA que permite realizar consultas en lenguaje natural.", "Sistema de gestión obstétrica con control de acceso basado en roles y permisos."] },
+    journey: { title: "Construir, aprender,", accent: "iterar", subtitle: "Una trayectoria orientada a resolver problemas, colaborar con clientes y aprender haciendo.", items: [{ title: "Desarrollo Full Stack", meta: "Desde 2022", description: "Construcción de productos web completos con foco en utilidad, claridad y despliegue real." }, { title: "Zero to Agent", meta: "Vercel · Abril 2026", description: "Participación en el hackathon global con HR Copilot Chile, usando v0 y MCPs." }, { title: "Próximo desafío", meta: "Disponible", description: "Buscando el siguiente proyecto y profundizando en agentes autónomos y arquitecturas escalables." }], languages: "Idiomas", languageItems: ["Español · Nativo", "Inglés · Básico / lectura técnica", "Japonés · Comprensión auditiva"] },
+    contact: { title: "Construyamos algo", accent: "útil", description: "Estoy disponible para conversar sobre proyectos web, productos digitales e integraciones de IA. Si tienes una idea o un desafío, escríbeme.", email: "Enviar correo", profile: "Visitar perfil", code: "Ver GitHub", instagram: "Ver Instagram" },
+    footer: { nav: "Navegación", connect: "Conecta", focus: "Enfoque", location: "Ubicación", rights: "Todos los derechos reservados.", crafted: "Construido con Next.js y Tailwind CSS", focusItems: ["Desarrollo Full Stack", "Productos web", "IA aplicada"] },
+  },
+  en: {
+    nav: { about: "About", skills: "Skills", projects: "Projects", journey: "Journey", contact: "Contact" },
+    ui: { skip: "Skip to content", mainNav: "Main navigation", mobileNav: "Mobile navigation", openMenu: "Open menu", closeMenu: "Close menu", light: "Switch to light mode", dark: "Switch to dark mode", language: "Change language", external: "opens in a new window" },
+    hero: { badge: "Available for new projects", role: "Full Stack Developer · AI Builder", intro: "I build web products that solve real problems, combining Next.js, React, and Django with artificial intelligence whenever the challenge calls for it.", work: "View projects", talk: "Let’s talk", since: "Building since 2022", location: "Ñuble Region, Chile", focus: "Web + applied AI" },
+    about: { title: "About", accent: "me", p1: "I’m a Full Stack developer passionate about turning ideas into useful digital products. I work with clients who want to bring their businesses online and join hackathons where I learn and build under pressure.", p2: "I specialize in Next.js, React, and Django, and integrate artificial intelligence when it adds real value to the product.", expertise: "What I focus on", info: "Quick facts", cards: [{ title: "Real products", description: "Web solutions designed around concrete needs for businesses and communities." }, { title: "Applied AI", description: "LLM and agent integrations that make complex tasks feel simpler." }, { title: "Continuous learning", description: "Exploring autonomous agents and scalable architectures." }], labels: { location: "Location", email: "Email", experience: "Experience", languages: "Languages" }, values: { experience: "Since 2022", languages: "ES · EN · JP" } },
+    skills: { title: "Stack and", accent: "tools", subtitle: "Technologies I use to design, build, and deploy end-to-end products.", categories: ["Languages", "Frontend", "Backend", "Databases", "Cloud and AI", "Workflow"] },
+    projects: { title: "Featured", accent: "projects", subtitle: "Client products, agent experiments, and solutions built for real-world contexts.", live: "View project", repo: "View code", client: "Client project · Completed", hackathon: "Zero to Agent · Vercel Global Hackathon, Apr 2026", descriptions: ["AI-powered HR assistant for the Chilean workplace. It answers questions about labor law using Claude AI.", "Community platform for Chilean collectors of vintage figures and retro toys, with a dark-fantasy and steampunk aesthetic plus PWA support.", "Inventory management with an AI agent that supports natural-language queries.", "Obstetric management system with role- and permission-based access control."] },
+    journey: { title: "Build, learn,", accent: "iterate", subtitle: "A journey focused on solving problems, collaborating with clients, and learning by doing.", items: [{ title: "Full Stack development", meta: "Since 2022", description: "Building complete web products with a focus on usefulness, clarity, and real deployment." }, { title: "Zero to Agent", meta: "Vercel · April 2026", description: "Joined the global hackathon with HR Copilot Chile, using v0 and MCPs." }, { title: "Next challenge", meta: "Available", description: "Looking for the next project while going deeper into autonomous agents and scalable architectures." }], languages: "Languages", languageItems: ["Spanish · Native", "English · Basic / technical reading", "Japanese · Listening comprehension"] },
+    contact: { title: "Let’s build something", accent: "useful", description: "I’m available to talk about web projects, digital products, and AI integrations. If you have an idea or a challenge, send me a message.", email: "Send email", profile: "Visit profile", code: "View GitHub", instagram: "View Instagram" },
+    footer: { nav: "Navigation", connect: "Connect", focus: "Focus", location: "Location", rights: "All rights reserved.", crafted: "Built with Next.js and Tailwind CSS", focusItems: ["Full Stack development", "Web products", "Applied AI"] },
+  },
+} as const
+
+type LanguageContextValue = { language: Language; setLanguage: (language: Language) => void; t: (typeof copy)[Language] }
+const LanguageContext = createContext<LanguageContextValue | null>(null)
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguageState] = useState<Language>("es")
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("language")
+    if (saved === "en" || saved === "es") setLanguageState(saved)
+  }, [])
+
+  useEffect(() => { document.documentElement.lang = language }, [language])
+
+  const setLanguage = (next: Language) => {
+    setLanguageState(next)
+    window.localStorage.setItem("language", next)
+  }
+
+  return <LanguageContext.Provider value={{ language, setLanguage, t: copy[language] }}>{children}</LanguageContext.Provider>
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext)
+  if (!context) throw new Error("useLanguage must be used within LanguageProvider")
+  return context
+}
