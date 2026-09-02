@@ -22,7 +22,7 @@ export default function Header({ isDark, toggleDarkMode }: HeaderProps) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="#main-content" className="flex items-center gap-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
           <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">JR</span>
-          <span className="hidden text-lg font-bold sm:inline">Jose Rivera</span>
+          <span className="hidden text-lg font-bold sm:inline">José Eliecer Rivera</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex" aria-label={t.ui.mainNav}>{navLinks.map((link) => <a key={link.href} href={link.href} className="rounded px-2 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary">{link.label}</a>)}</nav>
         <div className="flex items-center gap-2">
