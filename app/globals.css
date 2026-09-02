@@ -157,6 +157,14 @@ html {
   .interactive-card:hover::after { opacity: 1; }
 }
 
+.github-brand-mark {
+  filter: none;
+}
+
+.dark .github-brand-mark {
+  filter: brightness(0) invert(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .interactive-card { transition: border-color 120ms ease, box-shadow 120ms ease; }
   .interactive-card:hover { transform: none; }

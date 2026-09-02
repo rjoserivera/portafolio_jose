@@ -23,6 +23,5 @@ export function BrandBadge({ name }: { name: string }) {
 }
 
 export function BrandMark({ slug, label }: { slug: string; label: string }) {
-  const variant = slug === "github" ? "light" : "default"
-  return <span className="flex size-8 items-center justify-center rounded-md bg-foreground/10"><img src={`https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/${slug}/${variant}.svg`} alt={`${label} logo`} width="20" height="20" className="size-5 object-contain" /></span>
+  return <span className="flex size-8 items-center justify-center rounded-md bg-foreground/10"><img src={`https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/${slug}/default.svg`} alt={`${label} logo`} width="20" height="20" className={slug === "github" ? "github-brand-mark size-5 object-contain" : "size-5 object-contain"} /></span>
 }
