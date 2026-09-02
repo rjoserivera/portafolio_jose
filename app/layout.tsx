@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: "José Eliecer Rivera | Desarrollador Full Stack",
   description: "TNS Analista Programador y estudiante de Ingeniería en Informática de la Región de Ñuble. Desarrollo plataformas web y soluciones digitales.",
   keywords: ["José Eliecer Rivera", "Full Stack Developer", "Analista Programador", "Ingeniería en Informática", "Next.js", "React", "Django", "Chile", "Ñuble"],
-  openGraph: { title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica desde la Región de Ñuble.", type: "website", locale: "es_CL", alternateLocale: "en_US", url: siteUrl, images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: "José Eliecer Rivera, desarrollador Full Stack" }] },
-  twitter: { card: "summary_large_image", title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica.", images: ["/opengraph-image.jpg"] },
+  openGraph: { title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica desde la Región de Ñuble.", type: "website", locale: "es_CL", alternateLocale: "en_US", url: siteUrl, images: [{ url: "/opengraph-image.jpeg", width: 1200, height: 630, alt: "José Eliecer Rivera, desarrollador Full Stack" }] },
+  twitter: { card: "summary_large_image", title: "José Eliecer Rivera | Desarrollador Full Stack", description: "Desarrollo web, productos en producción y resolución técnica.", images: ["/opengraph-image.jpeg"] },
   alternates: { canonical: siteUrl },
   robots: { index: true, follow: true },
 }
