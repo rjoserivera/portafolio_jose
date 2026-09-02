@@ -1,7 +1,8 @@
 "use client"
 
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { motion } from "framer-motion"
+import { BrandBadge, BrandMark } from "./brand-badge"
 import { useLanguage } from "./language-provider"
 
 const projects = [
@@ -23,8 +24,8 @@ export default function Projects() {
     <div className="grid gap-5 md:grid-cols-2">{projects.map((project, i) => <motion.article key={project.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 2) * .08 }} className="flex min-h-80 flex-col rounded-xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary">
       <p className="mb-4 font-mono text-xs uppercase tracking-wider text-primary">{labels[project.type]}</p>
       <h3 className="mb-3 text-2xl font-bold">{project.title}</h3><p className="mb-6 flex-1 leading-relaxed text-muted-foreground">{t.projects.descriptions[i]}</p>
-      <div className="mb-6 flex flex-wrap gap-2">{project.tech.map(item => <span key={item} className="rounded-md bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">{item}</span>)}</div>
-      <div className="flex flex-wrap gap-5">{"live" in project && project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{t.projects.live}<ExternalLink className="size-4" /></a>}{"repo" in project && project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold hover:text-primary"><Github className="size-4" />{t.projects.repo}</a>}</div>
+      <div className="mb-6 flex flex-wrap gap-2">{project.tech.map(item => <BrandBadge key={item} name={item} />)}</div>
+      <div className="flex flex-wrap gap-5">{"live" in project && project.live && <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{t.projects.live}<ExternalLink className="size-4" /></a>}{"repo" in project && project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold hover:text-primary"><BrandMark slug="github" label="GitHub" />{t.projects.repo}</a>}</div>
     </motion.article>)}</div>
   </div></section>
 }

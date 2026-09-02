@@ -24,5 +24,5 @@ export const viewport: Viewport = { themeColor: "#0b090a", width: "device-width"
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const person = { "@context": "https://schema.org", "@type": "Person", name: "José Eliecer Rivera", url: siteUrl, jobTitle: "Desarrollador Full Stack y TNS Analista Programador", email: "mailto:rjoseeliecer@gmail.com", address: { "@type": "PostalAddress", addressRegion: "Región de Ñuble", addressCountry: "CL" }, sameAs: ["https://github.com/rjoserivera", "https://www.linkedin.com/in/rjoseeliecer/", "https://www.instagram.com/natsuki_subaru_pride_if/"], knowsAbout: ["Next.js", "React", "Django", "TypeScript", "Python", "Artificial Intelligence"] }
-  return <html lang="es" className="bg-background" suppressHydrationWarning><body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>{children}<Analytics /><Script id="structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></body></html>
+  return <html lang="es" className="dark bg-background" suppressHydrationWarning><body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>{children}<Analytics /><Script id="structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></body></html>
 }

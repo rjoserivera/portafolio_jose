@@ -11,7 +11,7 @@ export default function Hero() {
   return <SilkBackground><section id="main-content" className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
     <motion.div className="mx-auto max-w-5xl text-center" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
       <p className="mb-4 font-mono text-sm uppercase tracking-[0.22em] text-primary">{t.hero.role}</p>
-      <h1 className="mb-6 text-balance text-6xl font-bold leading-none tracking-tight sm:text-7xl lg:text-8xl">José Eliecer <span className="text-primary">Rivera</span></h1>
+      <h1 className="mb-6 text-balance text-6xl font-bold leading-none tracking-tight sm:text-7xl lg:text-8xl">José Eliecer <span className="text-foreground">Rivera</span></h1>
       <p className="mx-auto mb-10 max-w-3xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">{t.hero.intro}</p>
       <div className="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
         <motion.a href="#projects" whileHover={{ y: -2 }} className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-3 font-medium text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">{t.hero.work}<ArrowRight className="size-4" /></motion.a>
