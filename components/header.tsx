@@ -13,7 +13,7 @@ export default function Header({ isDark, toggleDarkMode }: HeaderProps) {
   const navLinks = [
     { href: "#about", label: t.nav.about }, { href: "#skills", label: t.nav.skills },
     { href: "#projects", label: t.nav.projects }, { href: "#journey", label: t.nav.journey },
-    { href: "#contact", label: t.nav.contact },
+    { href: "#certificates", label: t.nav.certificates }, { href: "#contact", label: t.nav.contact },
   ]
 
   return <>

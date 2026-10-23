@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import About from "@/components/about"
+import Certificates from "@/components/certificates"
 import Contact from "@/components/contact"
 import Experience from "@/components/experience"
 import Footer from "@/components/footer"
@@ -38,6 +39,7 @@ export default function Home() {
           <Skills />
           <Projects />
           <Experience />
+          <Certificates />
           <Contact />
         </main>
         <Footer />
