@@ -10,50 +10,50 @@ const certificates = [
     file: "/certificados/CERTIFICADO DE TITULO.pdf",
     icon: GraduationCap,
     featured: true,
-    color: "from-amber-500/20 to-yellow-500/10",
-    borderColor: "border-amber-500/40",
-    iconColor: "text-amber-400",
-    badgeColor: "bg-amber-500/20 text-amber-300",
+    color: "from-amber-500/15 via-amber-500/5 to-transparent dark:from-amber-500/20 dark:to-yellow-500/10",
+    borderColor: "border-amber-400/50 dark:border-amber-500/40",
+    iconColor: "text-amber-600 dark:text-amber-400",
+    badgeColor: "bg-amber-100 text-amber-950 border border-amber-300 font-semibold dark:bg-amber-500/20 dark:text-amber-200 dark:border-amber-500/40",
   },
   {
     slug: "fullstack",
     file: "/certificados/CERTIFICADO EN DESARROLLADOR FULL STACK.pdf",
     icon: Star,
     featured: false,
-    color: "from-primary/20 to-accent/10",
-    borderColor: "border-primary/40",
+    color: "from-primary/10 to-accent/5 dark:from-primary/20 dark:to-accent/10",
+    borderColor: "border-primary/30 dark:border-primary/40",
     iconColor: "text-primary",
-    badgeColor: "bg-primary/20 text-primary",
+    badgeColor: "bg-primary/10 text-primary border border-primary/25 dark:bg-primary/20 dark:text-primary dark:border-primary/40",
   },
   {
     slug: "multicloud",
     file: "/certificados/CERTIFICADO EN ARQUITECTURA MULTICLOUD.pdf",
     icon: Shield,
     featured: false,
-    color: "from-sky-500/20 to-blue-500/10",
-    borderColor: "border-sky-500/40",
-    iconColor: "text-sky-400",
-    badgeColor: "bg-sky-500/20 text-sky-300",
+    color: "from-sky-500/10 to-blue-500/5 dark:from-sky-500/20 dark:to-blue-500/10",
+    borderColor: "border-sky-400/40 dark:border-sky-500/40",
+    iconColor: "text-sky-600 dark:text-sky-400",
+    badgeColor: "bg-sky-100 text-sky-950 border border-sky-300 dark:bg-sky-500/20 dark:text-sky-200 dark:border-sky-500/40",
   },
   {
     slug: "dev-inicial",
     file: "/certificados/CERTIFICADO EN DESARROLLO DE APLICACIONES INICIALES.pdf",
     icon: Award,
     featured: false,
-    color: "from-violet-500/20 to-purple-500/10",
-    borderColor: "border-violet-500/40",
-    iconColor: "text-violet-400",
-    badgeColor: "bg-violet-500/20 text-violet-300",
+    color: "from-violet-500/10 to-purple-500/5 dark:from-violet-500/20 dark:to-purple-500/10",
+    borderColor: "border-violet-400/40 dark:border-violet-500/40",
+    iconColor: "text-violet-600 dark:text-violet-400",
+    badgeColor: "bg-violet-100 text-violet-950 border border-violet-300 dark:bg-violet-500/20 dark:text-violet-200 dark:border-violet-500/40",
   },
   {
     slug: "infraestructura",
     file: "/certificados/CERTIFICADO EN INFRAESTRUCTURA TI SEGURA.pdf",
     icon: Shield,
     featured: false,
-    color: "from-emerald-500/20 to-green-500/10",
-    borderColor: "border-emerald-500/40",
-    iconColor: "text-emerald-400",
-    badgeColor: "bg-emerald-500/20 text-emerald-300",
+    color: "from-emerald-500/10 to-green-500/5 dark:from-emerald-500/20 dark:to-green-500/10",
+    borderColor: "border-emerald-400/40 dark:border-emerald-500/40",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
+    badgeColor: "bg-emerald-100 text-emerald-950 border border-emerald-300 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border-emerald-500/40",
   },
 ]
 
@@ -112,7 +112,7 @@ export default function Certificates() {
                     </div>
                     <div>
                       <span className={`mb-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${cert.badgeColor}`}>
-                        <Star className="size-3" />
+                        <Star className="size-3 text-amber-700 dark:text-amber-300 shrink-0" />
                         {certs.featuredLabel}
                       </span>
                       <h3 className="shimmer-text mb-1 text-2xl font-bold lg:text-3xl">{data.title}</h3>
